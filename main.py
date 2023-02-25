@@ -1,6 +1,6 @@
-from Cpf import Cpf
 
-cpf = "15648582988"
-objeto_cpf = Cpf(cpf)
+from cpf_cnpj import Cpf
 
-print(objeto_cpf)
+cpf = CPF()
+
+print(cpf.validate("012.345.678-90"))
