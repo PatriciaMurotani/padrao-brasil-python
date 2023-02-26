@@ -1,11 +1,21 @@
 from validate_docbr import CPF
 class CpfCnpj:
-    def __init__(self, documento):
+    def __init__(self, documento, tipo_documento):
+        self.tipo_documento = tipo_documento
         documento = str(documento)
-        if self.cpf_e_valido(documento):
-            self.cpf = documento
+        if self.tipo_documento == "cpf":
+            if self.cpf_e_valido(documento):
+                self.cpf = documento
+            else:
+                raise ValueError("CPF Inválido!!!")
+        elif self.tipo_documento == "cnpj":
+            if self.cnpj_e_valido(documento):
+                self.cnpj = documento
+            else:
+                raise ValueError("CNPJ Inválido!!!")
         else:
-            raise ValueError("CPF Inválido!!!")
+            raise ValueError("Documento inválido!!!")
+
 
     def cpf_e_valido(self, documento):
         if len(documento) == 11:
@@ -19,6 +29,13 @@ class CpfCnpj:
         return mascara.mask(self.cpf)
     def __str__(self):
         return self.format_cpf()
+
+    def cnpj_e_valido(self, cnpj):
+        if len(cnpj) == 14:
+            validate_cnpj = CNPJ()
+            return validate_cnpj.validate(cnpj)
+        else:
+            raise ValueError ("Quantidade de dígitos inválida!!!")
 
 
 
